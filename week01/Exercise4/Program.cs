@@ -22,23 +22,61 @@ class Program
             }
         }
 
+        // Compute the sum
         int sum = 0;
-        int max = numbers[0];
-
-        foreach (int number in numbers)
+        foreach (int num in numbers)
         {
-            sum += number;
+            sum += num;
+        }
 
-            if (number > max)
+        // Compute the average
+        double average = (double)sum / numbers.Count;
+
+        // Find the largest number
+        int max = numbers[0];
+        foreach (int num in numbers)
+        {
+            if (num > max)
             {
-                max = number;
+                max = num;
             }
         }
 
-        double average = (double)sum / numbers.Count;
+        // Find the smallest positive number
+        int? smallestPositive = null;
+        foreach (int num in numbers)
+        {
+            if (num > 0)
+            {
+                if (smallestPositive == null || num < smallestPositive)
+                {
+                    smallestPositive = num;
+                }
+            }
+        }
 
+        // Sort the list
+        numbers.Sort();
+
+        // Display Results
         Console.WriteLine($"The sum is: {sum}");
         Console.WriteLine($"The average is: {average}");
         Console.WriteLine($"The largest number is: {max}");
+
+        if (smallestPositive != null)
+        {
+            Console.WriteLine($"The smallest positive number is: {smallestPositive}");
+        }
+        else
+        {
+            Console.WriteLine("There were no positive numbers.");
+        }
+
+        Console.Write("The sorted list is: ");
+        foreach (int num in numbers)
+        {
+            Console.Write($"{num} ");
+        }
+        Console.WriteLine();
     }
 }
