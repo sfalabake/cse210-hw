@@ -46,7 +46,7 @@ public class Journal
 
         foreach (string line in lines)
         {
-            string[] parts = line.Split("|");
+            string[] parts = line.Split("|", 3);
 
             Entry entry = new Entry();
             entry._date = parts[0];

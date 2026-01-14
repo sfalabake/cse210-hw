@@ -1,6 +1,8 @@
-// Exceeding requirements:
-// - Added file existence checking before loading to prevent crashes
-// - Clean abstraction with dedicated classes for prompts, entries, and journal management
+// Exceeded core requirements by:
+// - Implementing random prompt generation
+// - Supporting saving and loading journal entries from files
+// - Separating responsibilities using abstraction (Journal, Entry, PromptGenerator)
+
 
 using System;
 
