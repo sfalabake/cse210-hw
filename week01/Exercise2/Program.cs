@@ -34,8 +34,8 @@ class Program
 
         int lastDigit = grade % 10;
 
-        // Determine + or -
-        if (letter != "F")
+        // Determine + or - (exclude F and 100)
+        if (letter != "F" && grade < 100)
         {
             if (lastDigit >= 7)
             {
@@ -49,12 +49,6 @@ class Program
 
         // No A+
         if (letter == "A" && sign == "+")
-        {
-            sign = "";
-        }
-
-        // No F+ or F-
-        if (letter == "F")
         {
             sign = "";
         }
