@@ -1,17 +1,14 @@
 public class Word
 {
-    // Attributes
     private string _text;
     private bool _isHidden;
 
-    // Constructor
     public Word(string text)
     {
         _text = text;
         _isHidden = false;
     }
 
-    // Behaviors
     public void Hide()
     {
         _isHidden = true;
@@ -29,6 +26,11 @@ public class Word
 
     public string GetDisplayText()
     {
-        return "";
+        if (_isHidden)
+        {
+            return new string('_', _text.Length);
+        }
+
+        return _text;
     }
 }
