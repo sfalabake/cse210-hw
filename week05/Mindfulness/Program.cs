@@ -5,6 +5,15 @@ class Program
 {
     static void Main()
     {
+
+        /*
+            * EXCEEDS CORE REQUIREMENTS:
+            * - Added persistent session logging: each activity completed is saved to "session_log.txt".
+            * - Added menu option to view session history.
+            * - Randomized prompts/questions for replay value.
+            * - Lifecycle and animation logic centralized in the base Activity class.
+        */
+
         bool running = true;
 
         while (running)
