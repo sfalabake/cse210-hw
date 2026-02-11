@@ -19,7 +19,7 @@ class Program
             Console.Write("\nSelect an option: ");
 
             string choice = Console.ReadLine();
-            Activity? activity = null;
+            Activity activity = null;
 
             switch (choice)
             {
