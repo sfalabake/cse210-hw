@@ -18,6 +18,8 @@ public class ReflectingActivity : Activity
         "What strengths did you use?"
     };
 
+    private static Random _random = new Random();
+
     public ReflectingActivity()
         : base(
             "Reflecting",
@@ -27,10 +29,7 @@ public class ReflectingActivity : Activity
 
     public override void Run()
     {
-        StartActivity();
-
-        Random random = new Random();
-        string prompt = _prompts[random.Next(_prompts.Count)];
+        string prompt = _prompts[_random.Next(_prompts.Count)];
 
         Console.WriteLine($"\n--- {prompt} ---");
         Console.WriteLine("Press Enter when ready.");
@@ -40,11 +39,11 @@ public class ReflectingActivity : Activity
 
         while (DateTime.Now < endTime)
         {
-            string question = _questions[random.Next(_questions.Count)];
+            string question = _questions[_random.Next(_questions.Count)];
             Console.Write($"\n{question} ");
-            ShowSpinner(5);
-        }
 
-        EndActivity();
+            int remaining = (int)(endTime - DateTime.Now).TotalSeconds;
+            ShowSpinner(Math.Min(5, remaining));
+        }
     }
 }

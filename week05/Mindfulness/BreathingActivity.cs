@@ -11,8 +11,6 @@ public class BreathingActivity : Activity
 
     public override void Run()
     {
-        StartActivity();
-
         int elapsed = 0;
 
         while (elapsed < _duration)
@@ -25,7 +23,5 @@ public class BreathingActivity : Activity
             ShowCountdown(6);
             elapsed += 6;
         }
-
-        EndActivity();
     }
 }

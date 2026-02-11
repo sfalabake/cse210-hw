@@ -11,6 +11,8 @@ public class ListingActivity : Activity
         "What are moments you felt joy today?"
     };
 
+    private static Random _random = new Random();
+
     public ListingActivity()
         : base(
             "Listing",
@@ -20,10 +22,7 @@ public class ListingActivity : Activity
 
     public override void Run()
     {
-        StartActivity();
-
-        Random random = new Random();
-        string prompt = _prompts[random.Next(_prompts.Count)];
+        string prompt = _prompts[_random.Next(_prompts.Count)];
 
         Console.WriteLine($"\nList as many responses as you can to:\n--- {prompt} ---");
         Console.WriteLine("You may begin in:");
@@ -35,10 +34,14 @@ public class ListingActivity : Activity
         while (DateTime.Now < endTime)
         {
             Console.Write("> ");
-            items.Add(Console.ReadLine());
+            string input = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                items.Add(input);
+            }
         }
 
         Console.WriteLine($"\nYou listed {items.Count} items!");
-        EndActivity();
     }
 }

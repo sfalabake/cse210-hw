@@ -1,16 +1,10 @@
 using System;
+using System.IO;
 
 class Program
 {
     static void Main()
     {
-        /*
-         * EXCEEDS CORE REQUIREMENTS:
-         * - Added both spinner AND numeric countdown animations using backspaces.
-         * - Centralized animation logic in the base Activity class.
-         * - Randomized prompts/questions for replay value.
-         */
-
         bool running = true;
 
         while (running)
@@ -20,11 +14,12 @@ class Program
             Console.WriteLine("1. Start Breathing Activity");
             Console.WriteLine("2. Start Listing Activity");
             Console.WriteLine("3. Start Reflecting Activity");
-            Console.WriteLine("4. Quit");
+            Console.WriteLine("4. View Session History");
+            Console.WriteLine("5. Quit");
             Console.Write("\nSelect an option: ");
 
             string choice = Console.ReadLine();
-            Activity activity = null;
+            Activity? activity = null;
 
             switch (choice)
             {
@@ -38,16 +33,31 @@ class Program
                     activity = new ReflectingActivity();
                     break;
                 case "4":
+                    if (File.Exists("session_log.txt"))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Session History:\n");
+                        Console.WriteLine(File.ReadAllText("session_log.txt"));
+                    }
+                    else
+                    {
+                        Console.WriteLine("No sessions recorded yet.");
+                    }
+                    Console.WriteLine("\nPress Enter to return to menu.");
+                    Console.ReadLine();
+                    break;
+                case "5":
                     running = false;
                     break;
                 default:
-                    Console.WriteLine("Invalid choice.");
+                    Console.WriteLine("Invalid choice. Press Enter to try again.");
+                    Console.ReadLine();
                     break;
             }
 
-            activity?.Run();
+            activity?.Execute();
 
-            if (running)
+            if (running && choice != "4")
             {
                 Console.WriteLine("\nPress Enter to return to menu.");
                 Console.ReadLine();
