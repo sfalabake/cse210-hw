@@ -1,6 +1,6 @@
 using System;
 
-public abstract class Goal
+abstract class Goal
 {
     protected string _shortName;
     protected string _description;
@@ -13,18 +13,13 @@ public abstract class Goal
         _points = points;
     }
 
-    // Abstract methods that MUST be overridden in derived classes
-    public abstract void RecordEvent();
+    public abstract int RecordEvent();
     public abstract bool IsComplete();
     public abstract string GetStringRepresentation();
 
-    // Virtual method that can be overridden if needed
     public virtual string GetDetailsString()
     {
-        string statusSymbol = IsComplete() ? "[X]" : "[ ]";
-        return $"{statusSymbol} {_shortName} ({_description})";
+        string checkbox = IsComplete() ? "[X]" : "[ ]";
+        return $"{checkbox} {_shortName}: {_description}";
     }
-
-    public string GetName() => _shortName;
-    public int GetPoints() => _points;
 }

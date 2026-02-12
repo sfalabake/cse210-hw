@@ -1,13 +1,18 @@
-public class EternalGoal : Goal
+using System;
+
+class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, int points) : base(name, description, points) { }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-        // Points are awarded, but nothing changes internally
+        return _points;
     }
 
-    public override bool IsComplete() => false; // Never complete
+    public override bool IsComplete()
+    {
+        return false;
+    }
 
     public override string GetStringRepresentation()
     {

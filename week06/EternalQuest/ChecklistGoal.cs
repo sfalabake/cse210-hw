@@ -1,4 +1,6 @@
-public class ChecklistGoal : Goal
+using System;
+
+class ChecklistGoal : Goal
 {
     private int _amountCompleted;
     private int _target;
@@ -12,27 +14,27 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-        if (_amountCompleted < _target)
-        {
-            _amountCompleted++;
-        }
+        _amountCompleted++;
+        if (_amountCompleted == _target)
+            return _points + _bonus;
+        return _points;
     }
 
-    public override bool IsComplete() => _amountCompleted >= _target;
+    public override bool IsComplete()
+    {
+        return _amountCompleted >= _target;
+    }
 
-    // Overridden to show progress: "Completed 3/5"
     public override string GetDetailsString()
     {
-        string statusSymbol = IsComplete() ? "[X]" : "[ ]";
-        return $"{statusSymbol} {_shortName} ({_description}) -- Currently completed: {_amountCompleted}/{_target}";
+        string checkbox = IsComplete() ? "[X]" : "[ ]";
+        return $"{checkbox} {_shortName}: {_description} (Completed {_amountCompleted}/{_target})";
     }
 
     public override string GetStringRepresentation()
     {
-        return $"ChecklistGoal:{_shortName},{_description},{_points},{_bonus},{_target},{_amountCompleted}";
+        return $"ChecklistGoal:{_shortName},{_description},{_points},{_amountCompleted},{_target},{_bonus}";
     }
-
-    public int GetBonus() => _bonus;
 }
